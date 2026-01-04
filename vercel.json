@@ -1,0 +1,15 @@
+{
+  "builds": [
+    {
+      "src": "farmer_project/farmer_project/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "farmer_project/farmer_project/wsgi.py"
+    }
+  ]
+}
+
