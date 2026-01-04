@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+
+    <!-- ✅ CSS LINK -->
+    <link rel="stylesheet" href="{% static 'css/admin-login.css' %}">
+</head>
+<body>
+
+<div class="card">
+
+    <h2>🔐 Admin Login</h2>
+    <p class="subtitle">Secure access only</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="username"
+            value="FARMERADMIN"
+            readonly
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+        >
+
+        <button type="submit">Login</button>
+    </form>
+
+    <a class="forgot" href="{% url 'admin_forgot_password' %}">
+        Forgot password?
+    </a>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="msg">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<h2>👨‍🌾 Farmer Management</h2>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search by name / mobile / ID">
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for f in farmers %}
+    <tr>
+        <td>{{ f.farmer_id }}</td>
+        <td>{{ f.full_name }}</td>
+        <td>{{ f.mobile }}</td>
+
+        <td>
+            {% if f.is_active %}
+                ✅ Active
+            {% else %}
+                ❌ Inactive
+            {% endif %}
+        </td>
+
+        <td>
+            <a href="{% url 'toggle_farmer' f.id %}">
+                {% if f.is_active %}Deactivate{% else %}Activate{% endif %}
+            </a> |
+            <a href="{% url 'delete_farmer' f.id %}"
+               onclick="return confirm('Delete this farmer?')">
+                🗑 Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,44 @@
+body{
+    height:100vh;
+    background:url("/static/images/admin-bg.jpg") center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Poppins;
+}
+
+.card{
+    width:360px;
+    padding:30px;
+    background:rgba(0,0,0,0.65);
+    color:white;
+    border-radius:16px;
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#22c55e;
+    font-weight:600;
+    cursor:pointer;
+}
+
+a{
+    color:#a7f3d0;
+    font-size:13px;
+}
+
+.msg{
+    color:#86efac;
+}

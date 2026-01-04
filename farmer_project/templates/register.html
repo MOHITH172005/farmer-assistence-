@@ -1,0 +1,390 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account | Farmer Assistant</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+
+<div class="register-wrapper">
+
+    <!-- BRAND -->
+    <div class="brand-section">
+        <h1 class="animated-title">
+            <span class="word word-top">Farmer</span>
+            <span class="word word-bottom">Assistant</span>
+        </h1>
+        <p>Smart Agriculture<br>Powered by Artificial Intelligence</p>
+    </div>
+
+    <!-- REGISTER CARD -->
+    <div class="register-card">
+
+        <h2>Create Account</h2>
+        <span>Select your Farmer ID & continue</span>
+
+        <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            {% csrf_token %}
+
+            <!-- ================= FARMER ID (NEW FEATURE) ================= -->
+            <div class="accordion">
+    <button type="button"
+            class="accordion-btn active"
+            onclick="toggleIDPanel()">
+        Choose Farmer ID
+        <span id="chosen-id-label" class="selected-id"></span>
+    </button>
+
+    <div class="accordion-body show">
+
+        <!-- ID Suggestion Panel -->
+        <div class="id-panel" id="id-panel">
+            <div class="id-grid" id="farmer-ids"></div>
+
+            <button type="button"
+                    class="generate-link"
+                    onclick="generateIDs()">
+                🔄 Generate other IDs
+            </button>
+        </div>
+
+        <input type="hidden" name="farmer_id" id="selected-farmer-id" required>
+    </div>
+</div>
+
+            <!-- ================= CREDENTIALS ================= -->
+            <div class="accordion">
+                <button type="button" class="accordion-btn" onclick="openSection(1)">
+                    Credentials
+                </button>
+
+                <div class="accordion-body">
+                    <input type="email" name="email" id="email"
+                           placeholder="Gmail (example@gmail.com)" required>
+
+                    <input type="password" name="password1" id="password"
+                           placeholder="Strong Password" required>
+
+                    <input type="password" name="password2" id="confirm_password"
+                           placeholder="Confirm Password" required>
+
+                    <small style="font-size:12px;color:#ddd">
+                        Password must include Uppercase, Lowercase, Number & Symbol
+                    </small>
+                </div>
+            </div>
+
+            <!-- ================= PERSONAL DETAILS ================= -->
+            <div class="accordion">
+                <button type="button" class="accordion-btn" onclick="openSection(2)">
+                    Personal Details
+                </button>
+
+                <div class="accordion-body">
+                    <input type="text" name="full_name" placeholder="Full Name" required>
+                    <input type="tel" name="mobile" placeholder="Mobile Number" required>
+
+                    <input type="text" id="pincode" name="pincode"
+                           placeholder="Pincode" maxlength="6"
+                           onkeyup="getLocation()" required>
+
+                    <input type="text" id="district" name="district" placeholder="District" readonly required>
+                    <input type="text" id="state" name="state" placeholder="State" readonly required>
+                </div>
+            </div>
+
+            <!-- ================= CROP DETAILS ================= -->
+<div class="accordion">
+    <button type="button" class="accordion-btn" onclick="openSection(3)">
+        Crop Details
+    </button>
+
+    <div class="accordion-body">
+
+        <div class="form-group">
+            <select name="primary_crop" class="input-box" required>
+                <option value="" disabled selected>Select Primary Crop</option>
+
+                <!-- 🌾 CEREALS -->
+                <option>Rice</option>
+                <option>Wheat</option>
+                <option>Maize</option>
+                <option>Barley</option>
+                <option>Jowar (Sorghum)</option>
+                <option>Bajra (Pearl Millet)</option>
+                <option>Ragi (Finger Millet)</option>
+
+                <!-- 🌾 SMALL / NUTRI MILLETS -->
+                <option>Foxtail Millet (Korra)</option>
+                <option>Little Millet (Samai)</option>
+                <option>Kodo Millet</option>
+                <option>Proso Millet</option>
+                <option>Barnyard Millet</option>
+
+                <!-- 🌱 PULSES -->
+                <option>Red Gram (Tur / Arhar)</option>
+                <option>Green Gram (Moong)</option>
+                <option>Black Gram (Urad)</option>
+                <option>Chickpea (Gram)</option>
+                <option>Lentil (Masoor)</option>
+                <option>Horse Gram (Ulava)</option>
+                <option>Cowpea</option>
+                <option>Field Pea</option>
+
+                <!-- 🌻 OILSEEDS -->
+                <option>Groundnut</option>
+                <option>Mustard</option>
+                <option>Sunflower</option>
+                <option>Soybean</option>
+                <option>Sesame (Til)</option>
+                <option>Castor</option>
+                <option>Linseed (Flax)</option>
+                <option>Niger Seed</option>
+                <option>Safflower</option>
+
+                <!-- 🍬 COMMERCIAL -->
+                <option>Sugarcane</option>
+                <option>Cotton</option>
+                <option>Jute</option>
+                <option>Tobacco</option>
+                <option>Betel Leaf</option>
+
+                <!-- 🥔 VEGETABLES -->
+                <option>Potato</option>
+                <option>Onion</option>
+                <option>Tomato</option>
+                <option>Brinjal</option>
+                <option>Okra (Lady Finger)</option>
+                <option>Chilli</option>
+
+                <!-- 🍎 FRUITS -->
+                <option>Banana</option>
+                <option>Mango</option>
+                <option>Papaya</option>
+                <option>Apple</option>
+
+                <!-- 🌿 SPICES -->
+                <option>Turmeric</option>
+                <option>Ginger</option>
+                <option>Black Pepper</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="number" step="0.1" name="land_area"
+                   class="input-box"
+                   placeholder="Land Area (Acres)" required>
+        </div>
+
+        <div class="form-group">
+            <input type="file" name="photo" class="input-box file-box">
+        </div>
+
+    </div>
+</div>
+
+<!-- Checkbox -->
+<div class="checkbox-field">
+    <input type="checkbox" id="terms">
+    <label for="terms">
+        I agree to the
+        <a href="javascript:void(0)" onclick="openTerms()">Terms & Conditions</a>
+    </label>
+</div>
+
+<!-- TERMS MODAL -->
+<div id="termsModal" class="terms-modal">
+    <div class="terms-content">
+        <span class="close-btn" onclick="closeTerms()">×</span>
+
+        <h2>Terms & Conditions</h2>
+
+        <p><strong>Last updated:</strong> January 2026</p>
+
+        <p>
+            Welcome to <strong>Farmer Admin Platform</strong>. By using this website,
+            you agree to comply with and be bound by the following terms.
+        </p>
+
+        <h4>1. User Responsibility</h4>
+        <p>
+            You are responsible for providing accurate information including
+            mobile number, location, and crop data.
+        </p>
+
+        <h4>2. Data Usage</h4>
+        <p>
+            Farmer data may be used for analytics, AI crop recommendations,
+            weather alerts, and notifications.
+        </p>
+
+        <h4>3. AI & ML Services</h4>
+        <p>
+            AI predictions are advisory only. Final farming decisions
+            remain the responsibility of the farmer.
+        </p>
+
+        <h4>4. Account Security</h4>
+        <p>
+            You are responsible for maintaining confidentiality of your login
+            credentials.
+        </p>
+
+        <h4>5. Modifications</h4>
+        <p>
+            We reserve the right to update these terms at any time.
+        </p>
+
+        <button onclick="acceptTerms()">Accept & Continue</button>
+    </div>
+</div>
+
+
+
+<button class="submit-btn" type="submit">Create Account</button>
+
+<div class="extra">
+    <a href="{% url 'login' %}">Already have an account? Login</a>
+</div>
+
+        </form>
+    </div>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+/* ================= ACCORDION ================= */
+function openSection(index){
+    const bodies = document.querySelectorAll(".accordion-body");
+    const buttons = document.querySelectorAll(".accordion-btn");
+
+    bodies.forEach((body, i) => {
+        body.classList.toggle("show", i === index);
+        buttons[i].classList.toggle("active", i === index);
+    });
+}
+
+/* ================= FARMER ID LOGIC ================= */
+
+let selectedFarmerID = null;
+
+/* Generate 3 Farmer IDs */
+function generateIDs(){
+    fetch("{% url 'generate_farmer_ids' %}")
+        .then(res => res.json())
+        .then(data => {
+            const box = document.getElementById("farmer-ids");
+            box.innerHTML = "";
+
+            data.ids.forEach(id => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "id-btn";
+                btn.innerText = id;
+
+                btn.addEventListener("click", () => selectFarmerID(id, btn));
+                box.appendChild(btn);
+            });
+        });
+}
+
+/* Select Farmer ID */
+function selectFarmerID(id, btn){
+    // Remove active from all
+    document.querySelectorAll(".id-btn").forEach(b => b.classList.remove("active"));
+
+    // Activate selected
+    btn.classList.add("active");
+    selectedFarmerID = id;
+
+    // Store in hidden input
+    document.getElementById("selected-farmer-id").value = id;
+
+    // Update Choose Farmer ID button text
+    const headerBtn = document.querySelector(".accordion-btn.active");
+    headerBtn.innerHTML = `Choose Farmer ID <span class="selected-id">(${id})</span>`;
+}
+
+/* Auto-load IDs on page load */
+document.addEventListener("DOMContentLoaded", generateIDs);
+
+/* ================= FORM VALIDATION ================= */
+function validateForm(){
+    const email = document.getElementById("email").value.trim();
+    const pwd = document.getElementById("password").value;
+    const cpwd = document.getElementById("confirm_password").value;
+
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const strongPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if(!selectedFarmerID){
+        alert("Please select a Farmer ID");
+        openSection(0);
+        return false;
+    }
+
+    if(!gmailRegex.test(email)){
+        alert("Please enter a valid Gmail address");
+        openSection(1);
+        return false;
+    }
+
+    if(!strongPwd.test(pwd)){
+        alert("Password must include Uppercase, Lowercase, Number & Symbol");
+        openSection(1);
+        return false;
+    }
+
+    if(pwd !== cpwd){
+        alert("Passwords do not match");
+        openSection(1);
+        return false;
+    }
+
+    return true;
+}
+
+/* ================= PINCODE AUTO-FILL ================= */
+function getLocation(){
+    const pin = document.getElementById("pincode").value;
+
+    if(pin.length === 6){
+        fetch("https://api.postalpincode.in/pincode/" + pin)
+            .then(res => res.json())
+            .then(data => {
+                if(data[0].Status === "Success"){
+                    document.getElementById("district").value =
+                        data[0].PostOffice[0].District;
+                    document.getElementById("state").value =
+                        data[0].PostOffice[0].State;
+                } else {
+                    document.getElementById("district").value = "";
+                    document.getElementById("state").value = "";
+                }
+            });
+    }
+}
+</script>
+<script>
+function openTerms(){
+    document.getElementById("termsModal").style.display = "flex";
+}
+
+function closeTerms(){
+    document.getElementById("termsModal").style.display = "none";
+}
+
+function acceptTerms(){
+    document.getElementById("terms").checked = true;
+    closeTerms();
+}
+</script>
+
+
+</body>
+</html>

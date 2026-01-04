@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Password</title>
+
+    <!-- ✅ FIXED CSS PATH -->
+    <link rel="stylesheet" href="{% static 'css/admin-forgot.css' %}">
+</head>
+<body>
+
+<div class="forgot-wrapper">
+    <div class="forgot-card">
+        <h2>🔐 Forgot Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- ✅ name MUST be username -->
+            <input type="text"
+                   name="username"
+                   placeholder="Enter Admin ID"
+                   required>
+
+            <button type="submit">Generate OTP</button>
+        </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

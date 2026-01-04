@@ -1,0 +1,99 @@
+body {
+    background: linear-gradient(135deg, #232526, #414345);
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+h1 {
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    padding: 12px;
+    width: 250px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+}
+
+.btn.green {
+    background: #2ecc71;
+    border: none;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn.green:hover {
+    background: #27ae60;
+}
+
+.mandi-card {
+    background: rgba(0,0,0,0.35);
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.mandi-card h3 {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+th {
+    text-align: left;
+    opacity: 0.9;
+}
+
+.no-data {
+    text-align: center;
+    opacity: 0.8;
+}
+
+.btn.outline {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 22px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.back {
+    text-align: center;
+}

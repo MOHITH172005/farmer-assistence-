@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <title>Fertilizer Advice</title>
+    <link rel="stylesheet" href="{% static 'css/fertilizer.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🧪 Fertilizer Advice</h1>
+    <p class="subtitle">Get correct fertilizer & quantity for your crop</p>
+
+    <!-- INPUT FORM -->
+    <form method="POST" class="form-card">
+        {% csrf_token %}
+
+        <select name="crop" required>
+            <option value="">Select Crop</option>
+            <option>Rice</option>
+            <option>Wheat</option>
+            <option>Maize</option>
+            <option>Cotton</option>
+        </select>
+
+        <select name="soil" required>
+            <option value="">Soil Type</option>
+            <option>Black</option>
+            <option>Red</option>
+            <option>Loamy</option>
+            <option>Sandy</option>
+        </select>
+
+        <select name="stage" required>
+            <option value="">Growth Stage</option>
+            <option>Sowing</option>
+            <option>Vegetative</option>
+            <option>Flowering</option>
+            <option>Harvest</option>
+        </select>
+
+        <input type="number" step="0.1" name="acres"
+               placeholder="Land Area (Acres)" required>
+
+        <button class="btn green">Get Advice</button>
+    </form>
+
+    <!-- RESULT -->
+    {% if result %}
+    <div class="result-card">
+
+        <h2>✅ Fertilizer Recommendation</h2>
+
+        <p><strong>Crop:</strong> {{ result.crop }}</p>
+        <p><strong>Soil:</strong> {{ result.soil }}</p>
+        <p><strong>Growth Stage:</strong> {{ result.stage }}</p>
+
+        <h3>🌾 Fertilizers & Quantity</h3>
+        <ul>
+            {% for f, q in result.fertilizers.items %}
+            <li>{{ f }} – {{ q }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>🛠 Application Method</h3>
+        <p>{{ result.method }}</p>
+
+        <h3>⚠ Warning</h3>
+        <p class="warning">{{ result.warning }}</p>
+
+        <div class="actions">
+            <a href="https://agribegri.com" target="_blank"
+               class="btn green">
+               🛒 Buy Fertilizers
+            </a>
+
+            <a href="{% url 'contact_doctor' %}"
+               class="btn blue">
+               👨‍⚕️ Ask Plant Doctor
+            </a>
+        </div>
+
+    </div>
+    {% endif %}
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>

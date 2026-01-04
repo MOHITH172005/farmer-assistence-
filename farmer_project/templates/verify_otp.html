@@ -1,0 +1,43 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/auth-extra.css' %}">
+
+<div class="auth-card">
+    <h2>Verify OTP</h2>
+    <p>Enter the OTP sent to your mobile</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+
+    <!-- RESEND SECTION -->
+    <form method="post" action="{% url 'forgot_password' %}">
+        {% csrf_token %}
+        <button type="submit" id="resendBtn" disabled>
+            Resend OTP
+        </button>
+    </form>
+
+    <p id="timerText" style="margin-top:10px;font-size:13px;opacity:0.8;">
+        Resend OTP in <span id="timer">60</span> seconds
+    </p>
+</div>
+
+<script>
+let timeLeft = 60;
+let timer = document.getElementById("timer");
+let resendBtn = document.getElementById("resendBtn");
+let timerText = document.getElementById("timerText");
+
+let countdown = setInterval(() => {
+    timeLeft--;
+    timer.innerText = timeLeft;
+
+    if (timeLeft <= 0) {
+        clearInterval(countdown);
+        resendBtn.disabled = false;
+        timerText.innerText = "You can resend OTP now";
+    }
+}, 1000);
+</script>

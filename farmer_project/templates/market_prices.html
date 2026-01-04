@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <title>Market Prices</title>
+    <link rel="stylesheet" href="{% static 'css/market.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📊 Market Prices</h1>
+    <p class="subtitle">Check mandi-wise crop prices</p>
+
+    <!-- District Input -->
+    <form method="GET" class="search-box">
+        <input type="text" name="district"
+               placeholder="Enter District (eg: Chittoor)"
+               value="{{ district|default:'' }}"
+               required>
+        <button class="btn green">Search</button>
+    </form>
+
+    <!-- Results -->
+    {% if mandi_data %}
+        {% for mandi in mandi_data %}
+        <div class="mandi-card">
+            <h3>🏪 {{ mandi.mandi }}</h3>
+
+            <table>
+                <tr>
+                    <th>Crop</th>
+                    <th>Price</th>
+                </tr>
+                {% for crop in mandi.crops %}
+                <tr>
+                    <td>{{ crop.name }}</td>
+                    <td>{{ crop.price }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endfor %}
+    {% elif district %}
+        <p class="no-data">❌ No mandi data found for this district</p>
+    {% endif %}
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>

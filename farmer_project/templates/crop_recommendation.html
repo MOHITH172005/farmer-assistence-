@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Recommendation</title>
+    <link rel="stylesheet" href="{% static 'css/crop.css' %}">
+</head>
+
+<body>
+
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+    <span class="page-title">
+        {{ page_title|default:"Crop Recommendation" }}
+    </span>
+</div>
+
+<div class="container">
+    <h1>🌱 Crop Recommendation System</h1>
+    <p>Enter your field details to get the best crop suggestion</p>
+
+    <!-- ===== FORM ===== -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Soil Type</label>
+            <select name="soil_type" required>
+                <option value="">Select soil</option>
+                <option>Black</option>
+                <option>Red</option>
+                <option>Loamy</option>
+                <option>Sandy</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Season</label>
+            <select name="season" required>
+                <option value="">Select season</option>
+                <option>Kharif</option>
+                <option>Rabi</option>
+                <option>Zaid</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Average Rainfall (mm)</label>
+            <input type="number" name="rainfall" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label>Temperature (°C)</label>
+            <input type="number" name="temperature" min="0" required>
+        </div>
+
+        <button type="submit" class="btn">Predict Crop</button>
+    </form>
+
+    <!-- ===== RESULT ===== -->
+    {% if recommended_crops %}
+    <div class="result">
+        <h2>✅ Best Recommended Crop</h2>
+
+        <ul>
+            <li>
+                <strong>Crop:</strong>
+                {{ recommended_crops.0 }}
+            </li>
+
+            <li>
+                <strong>Estimated Duration:</strong>
+                {% if crop_duration %}
+                    {{ crop_duration }} days
+                {% else %}
+                    120 days
+                {% endif %}
+            </li>
+
+            <li>
+                <strong>Harvest Window:</strong>
+                {% if harvest_date %}
+                    Expected by {{ harvest_date }}
+                {% else %}
+                    120
+                {% endif %}
+            </li>
+        </ul>
+
+        <small style="color: gray;">
+            Source: {{ source|default:"AI System" }}
+        </small>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

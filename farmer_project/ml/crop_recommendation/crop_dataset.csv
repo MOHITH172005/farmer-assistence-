@@ -1,0 +1,51 @@
+soil,season,rainfall,temperature,crop
+Red,Kharif,650.0,28.0,Groundnut
+Red,Rabi,400.0,22.0,Chickpea
+Black,Kharif,800.0,30.0,Cotton
+Black,Rabi,500.0,20.0,Wheat
+Loamy,Kharif,700.0,27.0,Rice
+Loamy,Rabi,450.0,23.0,Mustard
+Sandy,Kharif,300.0,35.0,Bajra
+Sandy,Rabi,250.0,25.0,Barley
+Black,Rabi,3.0,10.0,Based on the given conditions
+Black,Rabi,3.0,10.0,the best crops for the specified soil
+Black,Rabi,3.0,10.0,season
+Black,Rabi,3.0,10.0,"and climate conditions are:
+
+Barley"
+Black,Rabi,3.0,10.0,Oats
+Black,Rabi,3.0,10.0,Mustard
+Black,Rabi,3.0,10.0,Fennel
+Black,Rabi,3.0,10.0,Turnip
+Black,Rabi,3.0,10.0,Cabbage
+Black,Rabi,3.0,10.0,Kale
+Black,Rabi,3.0,10.0,Peas.
+Black,Zaid,3.0,10.0,Based on the provided information
+Black,Zaid,3.0,10.0,it seems that the soil
+Black,Zaid,3.0,10.0,time of season
+Black,Zaid,3.0,10.0,rainfall
+Black,Zaid,3.0,10.0,"and temperature are not conducive for typical farming. Black soil is common in certain regions and suitable for specific crops.
+
+However"
+Black,Zaid,3.0,10.0,for a better understanding
+Black,Zaid,3.0,10.0,"the provided parameters might be interpreted as follows:
+- 'Black' could be interpreted as a specific type of soil (Black soil) typically found in parts of Asia"
+Black,Zaid,3.0,10.0,"rich in organic matter.
+- 'Zaid' season usually refers to the summer season.
+- 3 mm rainfall is a very low amount.
+- 10 °C temperature seems a bit low for most crops in summer but might imply conditions in high-altitude or cold summer areas.
+
+Considering these possible interpretations"
+Black,Zaid,3.0,10.0,"here are some suitable crops for the conditions provided:
+
+Tomatoes"
+Black,Zaid,3.0,10.0,Okra
+Black,Zaid,3.0,10.0,Cauliflower
+Black,Zaid,3.0,10.0,Chilli Pepper
+Black,Zaid,3.0,10.0,Cabbage
+Black,Zaid,3.0,10.0,Carrot
+Black,Zaid,3.0,10.0,Radish
+Black,Zaid,3.0,10.0,Fodder crops
+Black,Zaid,3.0,10.0,Oats
+Black,Zaid,3.0,10.0,Maize
+Black,Zaid,3.0,10.0,Potatoes.

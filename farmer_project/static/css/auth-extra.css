@@ -1,0 +1,112 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+/* ===== COLORS ===== */
+:root{
+    --bg-dark:#0b1f26;
+    --glass:rgba(255,255,255,0.15);
+    --accent:#22c55e;
+    --text-soft:rgba(255,255,255,0.85);
+}
+
+/* ===== BACKGROUND ===== */
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(34,197,94,0.15),
+            transparent 40%
+        ),
+        linear-gradient(
+            rgba(11,31,38,0.9),
+            rgba(11,31,38,0.9)
+        ),
+        url("/static/images/login-bg.webp") no-repeat center;
+    background-size:cover;
+}
+
+/* ===== CARD ===== */
+.auth-card{
+    width:100%;
+    max-width:380px;
+    padding:40px;
+    background:var(--glass);
+    backdrop-filter:blur(26px) saturate(120%);
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.18);
+    box-shadow:0 20px 60px rgba(0,0,0,0.45);
+    color:white;
+    text-align:center;
+}
+
+/* Title */
+.auth-card h2{
+    font-size:26px;
+    font-weight:600;
+}
+
+/* Subtitle */
+.auth-card p{
+    margin-top:8px;
+    font-size:14px;
+    color:var(--text-soft);
+}
+
+/* ===== INPUTS ===== */
+.auth-card input{
+    width:100%;
+    margin-top:22px;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    font-size:14px;
+    outline:none;
+}
+
+/* ===== BUTTON ===== */
+.auth-card button{
+    width:100%;
+    margin-top:30px;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(90deg,#22c55e,#4ade80);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    color:#083b22;
+    transition:0.3s;
+}
+
+.auth-card button:hover{
+    transform:translateY(-2px);
+}
+
+/* Links */
+.auth-card a{
+    display:block;
+    margin-top:18px;
+    font-size:13px;
+    color:var(--text-soft);
+    text-decoration:none;
+}
+
+.auth-card a:hover{
+    color:white;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+    .auth-card{
+        margin:20px;
+        padding:30px;
+    }
+}

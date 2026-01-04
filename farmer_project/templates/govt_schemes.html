@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Government Schemes</title>
+    <link rel="stylesheet" href="{% static 'css/govt_schemes.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🏛️ Government Agriculture Schemes</h1>
+    <p class="subtitle">
+        Central & State Government schemes for farmers
+    </p>
+
+    <!-- CENTRAL GOVT -->
+    <h2 class="section-title">🇮🇳 Central Government Schemes</h2>
+
+    <div class="scheme-grid">
+
+        <div class="scheme-card">
+            <img src="{% static 'images/pmkisan.webp' %}" alt="PM Kisan">
+            <h3>PM-KISAN</h3>
+            <p>Income support of ₹6000 per year to farmers</p>
+            <a href="https://pmkisan.gov.in" target="_blank" class="btn green">
+                Visit Official Site
+            </a>
+        </div>
+
+        <div class="scheme-card">
+            <img src="{% static 'images/pmfby.webp' %}" alt="PMFBY">
+            <h3>PMFBY</h3>
+            <p>Crop insurance against natural calamities</p>
+            <a href="https://pmfby.gov.in" target="_blank" class="btn green">
+                Visit Official Site
+            </a>
+        </div>
+
+        <div class="scheme-card">
+            <img src="{% static 'images/soilhealth.webp' %}" alt="Soil Health Card">
+            <h3>Soil Health Card</h3>
+            <p>Soil testing & nutrient recommendations</p>
+            <a href="https://soilhealth.dac.gov.in" target="_blank" class="btn green">
+                Visit Official Site
+            </a>
+        </div>
+
+    </div>
+
+    <!-- STATE GOVT -->
+    <h2 class="section-title">🏴 State Government Schemes</h2>
+
+    <div class="scheme-grid">
+
+        <div class="scheme-card">
+            <img src="{% static 'images/rythubandhu.webp' %}" alt="Rythu Bandhu">
+            <h3>Rythu Bandhu (Telangana)</h3>
+            <p>Investment support to farmers</p>
+            <a href="https://rythubandhu.telangana.gov.in" target="_blank" class="btn green">
+                Visit Official Site
+            </a>
+        </div>
+
+        <div class="scheme-card">
+            <img src="{% static 'images/rythubharosa.webp' %}" alt="YSR Rythu Bharosa">
+            <h3>YSR Rythu Bharosa (AP)</h3>
+            <p>Financial assistance for farmers</p>
+            <a href="https://ysrrythubharosa.ap.gov.in" target="_blank" class="btn green">
+                Visit Official Site
+            </a>
+        </div>
+
+        <div class="scheme-card">
+            <img src="{% static 'images/kcc.webp' %}" alt="Kisan Credit Card">
+            <h3>Kisan Credit Card</h3>
+            <p>Easy credit for farming needs</p>
+            <a href="https://www.myscheme.gov.in/schemes/kcc" target="_blank" class="btn green">
+                Visit Official Site
+            </a>
+        </div>
+
+    </div>
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>

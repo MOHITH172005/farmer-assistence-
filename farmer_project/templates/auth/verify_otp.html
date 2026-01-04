@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP | Farmer Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/trouble_login.css' %}">
+</head>
+<body>
+
+<div class="trouble-wrapper">
+    <div class="card">
+
+        <h2>Verify OTP</h2>
+        <p class="subtitle">Enter the OTP sent to your registered mobile number</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="field">
+                <input
+                    type="text"
+                    name="otp"
+                    placeholder="Enter 6-digit OTP"
+                    maxlength="6"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn primary">
+                Verify OTP
+            </button>
+        </form>
+
+        <div class="links">
+            <a href="{% url 'forgot_password' %}" class="forgot-link">
+                Resend / Change Mobile
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

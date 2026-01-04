@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Assistant</title>
+
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Splash CSS -->
+    <link rel="stylesheet" href="{% static 'css/splash.css' %}">
+</head>
+<body>
+
+<div class="video-splash">
+
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="{% static 'video/splash.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Center Text -->
+    <div class="content">
+        <h1>Farmer Assistant</h1>
+        <p>Smart Agriculture with Artificial Intelligence</p>
+    </div>
+
+</div>
+
+<script>
+    // Redirect after 5 seconds
+    setTimeout(function(){
+        window.location.href = "/login/";
+    }, 5000);
+</script>
+
+</body>
+</html>

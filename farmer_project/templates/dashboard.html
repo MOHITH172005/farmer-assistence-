@@ -1,0 +1,452 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ TEXT.dashboard|default:"Dashboard" }} | Farmer Assistant</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+    <h2>🌾 {{ TEXT.app_name|default:"Farmer" }}</h2>
+
+    <ul>
+        <li class="active" onclick="location.href='{% url 'dashboard' %}'">
+            🏠 {{ TEXT.dashboard|default:"Dashboard" }}
+        </li>
+
+        <li onclick="location.href='{% url 'crop_recommendation' %}'">
+            🌱 {{ TEXT.crop|default:"Crop Recommendation" }}
+        </li>
+
+        <li onclick="location.href='{% url 'disease_detection' %}'">
+            🦠 {{ TEXT.disease|default:"Disease Detection" }}
+        </li>
+
+        <li onclick="location.href='{% url 'weather_forecast' %}'">
+            ☁️ {{ TEXT.weather|default:"Weather Forecast" }}
+        </li>
+
+        <li onclick="location.href='{% url 'market_prices' %}'">
+            📊 {{ TEXT.market|default:"Market Prices" }}
+        </li>
+
+        <li onclick="location.href='{% url 'fertilizer_advice' %}'">
+            🧪 {{ TEXT.fertilizer|default:"Fertilizer Advice" }}
+        </li>
+
+        <li onclick="location.href='{% url 'irrigation' %}'">
+            💧 {{ TEXT.irrigation|default:"Irrigation" }}
+        </li>
+
+        <li onclick="location.href='{% url 'govt_schemes' %}'">
+            🏛 {{ TEXT.govt|default:"Govt Schemes" }}
+        </li>
+
+        <li onclick="location.href='{% url 'profile' %}'">
+            👤 {{ TEXT.profile|default:"Profile" }}
+        </li>
+
+        <li class="logout" onclick="location.href='{% url 'logout' %}'">
+            🚪 {{ TEXT.logout|default:"Logout" }}
+        </li>
+    </ul>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+    <!-- ===== HEADER ===== -->
+    <header class="topbar">
+        <h1>
+        Welcome,
+        {% if farmer_name %}
+            {{ farmer_name }} 👋
+        {% else %}
+            Farmer 👋
+        {% endif %}
+    </h1>
+    <p class="sub">
+        Farmer ID: <strong>{{ farmer_id }}</strong>
+    </p>
+
+        <div class="top-actions">
+
+            <!-- 🔔 NOTIFICATION -->
+            <div class="notify-wrapper">
+                <span class="notify" id="notifyBtn">
+                    🔔 <span id="notify-count" class="badge">0</span>
+                </span>
+
+                <div class="notify-dropdown" id="notifyDropdown">
+                    <h4>{{ TEXT.notifications|default:"Notifications" }}</h4>
+
+                    <div class="notify-empty" id="noNotify">
+                        {{ TEXT.no_notifications|default:"No new notifications" }}
+                    </div>
+                </div>
+            </div>
+
+            <span>{{ TEXT.dashboard_tagline|default:"Smart Agriculture Dashboard" }}</span>
+        </div>
+    </header>
+
+    <!-- ===== INFO CARDS ===== -->
+    <section class="cards">
+
+        <div class="card green" id="weather-card" data-feature="weather">
+            <h3>{{ TEXT.weather|default:"Weather" }}</h3>
+            <p id="weather-info">Detecting location...</p>
+            <small id="weather-hint"></small>
+        </div>
+
+        <div class="card blue" data-feature="crop">
+            <h3>{{ TEXT.primary_crop|default:"Primary Crop" }}</h3>
+            <p class="primary-crop">{{ primary_crop }}</p>
+        </div>
+
+        <div class="card orange" data-feature="market">
+            <h3>{{ TEXT.market|default:"Market Price" }}</h3>
+            <p>₹2100 / Quintal</p>
+        </div>
+
+        <div class="card purple" data-feature="land">
+    <h3>{{ TEXT.land_area|default:"Land Area" }}</h3>
+    <p>{{ land_area }} Acres</p>
+</div>
+
+
+    </section>
+
+    <!-- ===== CROP CALENDAR & ALERTS ===== -->
+    <section class="two-column">
+
+        <div class="calendar">
+    <h3>📅 {{ TEXT.crop_calendar|default:"Crop Calendar (AI)" }}</h3>
+
+    <ul>
+        <li>
+            <strong>{{ TEXT.crop|default:"Crop" }}</strong>
+            <span>
+                {{ primary_crop|default:"Not selected" }}
+            </span>
+        </li>
+
+        <li>
+    <strong>{{ TEXT.region|default:"Region" }}</strong>
+    <span id="region-text">Detecting location...</span>
+</li>
+
+        <li>
+    <strong>{{ TEXT.duration|default:"Estimated Duration" }}</strong>
+    <span id="duration-text">
+        {% if crop_duration %}
+            {{ crop_duration }} days
+        {% else %}
+            Calculating…
+        {% endif %}
+    </span>
+</li>
+
+<li>
+    <strong>{{ TEXT.harvest|default:"Harvest Window" }}</strong>
+    <span id="harvest-text">Calculating…</span>
+</li>
+
+    </ul>
+</div>
+
+
+        <div class="alerts">
+            <h3>🔔 {{ TEXT.alerts|default:"Alerts" }}</h3>
+            <div id="alert-list">
+                <div class="alert-item">Loading alerts...</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features">
+
+        {% comment %} Feature cards – unchanged behavior {% endcomment %}
+
+        <div class="feature-card" onclick="location.href='{% url 'crop_recommendation' %}'">
+            <h4>🌱 {{ TEXT.crop|default:"Crop Recommendation" }}</h4>
+            <p>Soil & season based AI crop selection</p>
+            <button class="btn green">{{ TEXT.check|default:"Check" }}</button>
+        </div>
+
+        <div class="feature-card" onclick="location.href='{% url 'disease_detection' %}'">
+            <h4>🦠 {{ TEXT.disease|default:"Disease Detection" }}</h4>
+            <p>Upload leaf image for instant diagnosis</p>
+            <button class="btn green">Upload Image</button>
+        </div>
+
+        <div class="feature-card" id="weatherCard">
+    <h4>☁️ {{ TEXT.weather|default:"Weather Forecast" }}</h4>
+    <p id="weather-desc">Detecting location…</p>
+    <button class="btn green">View</button>
+</div>
+
+
+        <div class="feature-card" onclick="location.href='{% url 'market_prices' %}'">
+            <h4>📊 {{ TEXT.market|default:"Market Prices" }}</h4>
+            <p>District-wise mandi crop prices</p>
+            <button class="btn green">View</button>
+        </div>
+
+        <div class="feature-card" onclick="location.href='{% url 'fertilizer_advice' %}'">
+            <h4>🧪 {{ TEXT.fertilizer|default:"Fertilizer Advice" }}</h4>
+            <p>Correct fertilizer & quantity</p>
+            <button class="btn green">Check</button>
+        </div>
+
+        <div class="feature-card" onclick="location.href='{% url 'irrigation' %}'">
+            <h4>💧 {{ TEXT.irrigation|default:"Irrigation" }}</h4>
+            <p>Water requirement & alerts</p>
+            <button class="btn green">View</button>
+        </div>
+
+        <div class="feature-card" onclick="location.href='{% url 'govt_schemes' %}'">
+            <h4>🏛 {{ TEXT.govt|default:"Govt Schemes" }}</h4>
+            <p>Central & State agriculture schemes</p>
+            <button class="btn green">Explore</button>
+        </div>
+
+        <div class="feature-card" onclick="location.href='{% url 'ai_assistant' %}'">
+            <h4>🤖 {{ TEXT.ai|default:"AI Assistant" }}</h4>
+            <p>Ask farming questions in your language</p>
+            <button class="btn green">Chat</button>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const weatherInfo = document.getElementById("weather-info");
+    const weatherHint = document.getElementById("weather-hint");
+    const regionText = document.getElementById("region-text"); // 👈 NEW
+
+    if (!navigator.geolocation) {
+        weatherInfo.innerText = "Location not supported";
+        if (regionText) regionText.innerText = "Location not available";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            try {
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+                    { headers: { "Accept-Language": "en" } }
+                );
+
+                const data = await response.json();
+
+                const city =
+                    data.address.city ||
+                    data.address.town ||
+                    data.address.village ||
+                    data.address.county ||
+                    "Unknown";
+
+                const state = data.address.state || "";
+                const country = data.address.country || "";
+
+                const locationText = `${city}, ${state}`;
+
+                // ✅ Weather card
+                weatherInfo.innerText = locationText;
+                weatherHint.innerText = country;
+
+                // ✅ Crop Calendar region
+                if (regionText) {
+                    regionText.innerText = locationText;
+                }
+
+            } catch (error) {
+                weatherInfo.innerText = "Unable to detect location";
+                if (regionText) regionText.innerText = "Location not available";
+            }
+        },
+        (error) => {
+            weatherInfo.innerText = "Permission denied";
+            if (regionText) regionText.innerText = "Permission denied";
+        },
+        {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
+        }
+    );
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const notifyBtn = document.getElementById("notifyBtn");
+    const notifyCount = document.getElementById("notify-count");
+    const notifyDropdown = document.getElementById("notifyDropdown");
+    const noNotify = document.getElementById("noNotify");
+
+    // 🔔 Toggle notification dropdown
+    notifyBtn.addEventListener("click", () => {
+        notifyDropdown.classList.toggle("show");
+        markNotificationsRead();
+    });
+
+    // 📥 Load notifications
+    async function loadNotifications() {
+        try {
+            const res = await fetch("/notifications/");
+            const data = await res.json();
+
+            if (data.unread_count > 0) {
+                notifyCount.innerText = data.unread_count;
+                notifyCount.style.display = "inline-block";
+                noNotify.style.display = "none";
+            } else {
+                notifyCount.style.display = "none";
+                noNotify.style.display = "block";
+            }
+
+        } catch (error) {
+            console.error("Notification error:", error);
+        }
+    }
+
+    // ✅ Mark notifications as read
+    async function markNotificationsRead() {
+        try {
+            await fetch("/notifications/mark-read/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken()
+                }
+            });
+            notifyCount.style.display = "none";
+        } catch (err) {}
+    }
+
+    // 🔐 CSRF token helper
+    function getCSRFToken() {
+        return document.querySelector("[name=csrfmiddlewaretoken]").value;
+    }
+
+    // 🔁 Auto refresh every 10 seconds
+    loadNotifications();
+    setInterval(loadNotifications, 10000);
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const durationText = document.getElementById("duration-text");
+    const harvestText = document.getElementById("harvest-text");
+
+    const cropDuration = Number("{{ crop_duration|default:'0' }}");
+
+    if (!cropDuration || cropDuration <= 0) {
+        durationText.innerText = "AI Predicted";
+        harvestText.innerText = "AI Predicted";
+        return;
+    }
+
+    const sowingDate = new Date();
+    const harvestDate = new Date();
+    harvestDate.setDate(sowingDate.getDate() + cropDuration);
+
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const harvestDateText = harvestDate.toLocaleDateString("en-IN", options);
+
+    function update() {
+        const today = new Date();
+        const diff = harvestDate - today;
+        const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        if (daysLeft > 0) {
+            durationText.innerText = `${daysLeft} days remaining`;
+            harvestText.innerText = `Expected by ${harvestDateText}`;
+        } else {
+            durationText.innerText = "Harvest time reached 🌾";
+            harvestText.innerText = "Ready for harvest";
+        }
+    }
+
+    update();
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const card = document.getElementById("weatherCard");
+    const desc = document.getElementById("weather-desc");
+
+    if (!navigator.geolocation) {
+        desc.innerText = "Location not supported";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            try {
+                // 🌍 Reverse geocoding (FAST & FREE)
+                const res = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+                );
+                const data = await res.json();
+
+                const city =
+                    data.address.city ||
+                    data.address.town ||
+                    data.address.village ||
+                    "Unknown";
+
+                const state = data.address.state || "";
+                const locationText = `${city}, ${state}`;
+
+                // ✅ Update UI instantly
+                desc.innerText = `7-day forecast for ${locationText}`;
+
+                // ✅ Click → open forecast with location
+                card.onclick = () => {
+                    window.location.href =
+                        `{% url 'weather_forecast' %}?city=${encodeURIComponent(city)}&state=${encodeURIComponent(state)}`;
+                };
+
+            } catch (err) {
+                desc.innerText = "Unable to detect location";
+            }
+        },
+        () => {
+            desc.innerText = "Location permission denied";
+        },
+        {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
+        }
+    );
+});
+</script>
+
+
+
+</body>
+</html>

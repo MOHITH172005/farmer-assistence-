@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loading Admin Panel</title>
+
+    <!-- AUTO REDIRECT AFTER 3 SECONDS -->
+    <meta http-equiv="refresh" content="5;url={% url 'admin_login' %}">
+
+    <link rel="stylesheet" href="{% static 'css/admin-splash.css' %}">
+</head>
+<body>
+
+<div class="splash-container">
+    <div class="logo">🌱</div>
+    <h1>Farmer Admin Panel</h1>
+    <p>Secure system loading...</p>
+
+    <div class="loader"></div>
+</div>
+
+</body>
+</html>

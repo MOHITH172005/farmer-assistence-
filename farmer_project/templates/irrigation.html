@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <title>Irrigation Management</title>
+    <link rel="stylesheet" href="{% static 'css/irrigation.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>💧 Irrigation Management</h1>
+    <p class="subtitle">Know exact water requirement & irrigation schedule</p>
+
+    <!-- FORM -->
+    <form method="POST" class="form-card">
+        {% csrf_token %}
+
+        <select name="crop" required>
+            <option value="">Select Crop</option>
+            <option>Rice</option>
+            <option>Wheat</option>
+            <option>Maize</option>
+            <option>Cotton</option>
+        </select>
+
+        <select name="soil" required>
+            <option value="">Soil Type</option>
+            <option>Black</option>
+            <option>Red</option>
+            <option>Loamy</option>
+            <option>Sandy</option>
+        </select>
+
+        <select name="season" required>
+            <option value="">Season</option>
+            <option>Kharif</option>
+            <option>Rabi</option>
+            <option>Zaid</option>
+        </select>
+
+        <input type="number" step="0.1" name="acres"
+               placeholder="Land Area (Acres)" required>
+
+        <button class="btn green">Check Water Need</button>
+    </form>
+
+    <!-- RESULT -->
+    {% if result %}
+    <div class="result-card">
+
+        <h2>🚰 Water Requirement</h2>
+
+        <p><strong>Crop:</strong> {{ result.crop }}</p>
+        <p><strong>Soil:</strong> {{ result.soil }}</p>
+        <p><strong>Season:</strong> {{ result.season }}</p>
+
+        <h3>📊 Requirement</h3>
+        <p>Daily: {{ result.daily }}</p>
+        <p>Weekly: {{ result.weekly }}</p>
+
+        <h3>🗓 Irrigation Schedule</h3>
+        <p>{{ result.schedule }}</p>
+
+        <h3>⚠ Alert</h3>
+        <p class="alert">{{ result.alert }}</p>
+
+    </div>
+    {% endif %}
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>

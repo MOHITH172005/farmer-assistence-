@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Doctor Support</title>
+    <link rel="stylesheet" href="{% static 'css/plant_doctor.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>👨‍⚕️ Plant Doctor Support</h1>
+    <p class="subtitle">
+        Get expert guidance for crop diseases, fertilizers & treatments
+    </p>
+
+    <div class="card-grid">
+
+        <!-- Call -->
+        <div class="card">
+            <h3>📞 Call Expert</h3>
+            <p>Talk directly with agriculture expert</p>
+            <a href="tel:+919876543210" class="btn green">
+                Call Now
+            </a>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="card">
+            <h3>💬 WhatsApp Support</h3>
+            <p>Send leaf images & get instant advice</p>
+            <a href="https://wa.me/919876543210" target="_blank" class="btn green">
+                Chat on WhatsApp
+            </a>
+        </div>
+
+        <!-- Email -->
+        <div class="card">
+            <h3>📧 Email Support</h3>
+            <p>Detailed crop issues & reports</p>
+            <a href="mailto:plantdoctor@farmerassist.in" class="btn green">
+                Send Email
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Appointment -->
+    <div class="appointment">
+        <h2>🗓 Request Expert Consultation</h2>
+
+        <form>
+            <input type="text" placeholder="Farmer Name" required>
+            <input type="tel" placeholder="Mobile Number" required>
+            <textarea placeholder="Describe your crop issue"></textarea>
+
+            <button type="submit" class="btn blue">
+                Submit Request
+            </button>
+        </form>
+    </div>
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Disease Detection</title>
+    <link rel="stylesheet" href="{% static 'css/disease.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🦠 Plant Disease Detection</h1>
+    <p class="subtitle">Upload a leaf image to detect disease & get solutions</p>
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data" class="upload-box">
+        {% csrf_token %}
+
+        <input type="file" name="leaf" id="leafInput" accept="image/*" required>
+
+        <label for="leafInput" class="upload-label">
+            📷 Choose Leaf Image
+        </label>
+
+        <img id="preview" class="preview-img" />
+
+        <button type="submit" class="btn green">
+            🔍 Detect Disease
+        </button>
+    </form>
+
+    <!-- RESULT -->
+    {% if result %}
+    <div class="result-card">
+
+        <h2>✅ Detection Result</h2>
+
+        <p><strong>Disease:</strong> {{ result.disease }}</p>
+        <p><strong>Confidence:</strong> {{ result.confidence }}%</p>
+
+        <hr>
+
+        <h3>🩺 Solution</h3>
+        <p>{{ result.details.solution }}</p>
+
+        <h3>🌾 Recommended Fertilizers</h3>
+        <ul>
+            {% for f in result.details.fertilizers %}
+            <li>{{ f }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>💊 Medicine</h3>
+        <p>{{ result.details.medicine }}</p>
+
+        <h3>🛡 Prevention</h3>
+        <p>{{ result.details.prevention }}</p>
+
+        <div class="actions">
+            <a href="https://agribegri.com" target="_blank" class="btn green">
+                🛒 Buy Fertilizers
+            </a>
+
+            <a href="{% url 'contact_doctor' %}" class="btn blue">
+                👨‍⚕️ Contact Plant Doctor
+            </a>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    // Image Preview
+    document.getElementById("leafInput").onchange = function (event) {
+        const img = document.getElementById("preview");
+        img.src = URL.createObjectURL(event.target.files[0]);
+        img.style.display = "block";
+    };
+</script>
+
+</body>
+</html>

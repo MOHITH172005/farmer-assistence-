@@ -1,0 +1,185 @@
+/* ================= GLOBAL ================= */
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#0b1f26,#0f2f3a);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Poppins',sans-serif;
+    margin:0;
+}
+
+/* ================= WRAPPER ================= */
+.trouble-wrapper{
+    width:100%;
+    max-width:420px;
+    padding:20px;
+}
+
+/* ================= CARD ================= */
+.card{
+    background:rgba(255,255,255,0.14);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    padding:38px 32px;
+    border-radius:22px;
+    color:#ffffff;
+    text-align:center;
+    box-shadow:0 25px 60px rgba(0,0,0,0.45);
+}
+
+/* ================= HEADER ================= */
+.card h2{
+    margin-bottom:6px;
+    font-size:26px;
+    font-weight:600;
+}
+
+.subtitle{
+    font-size:14px;
+    opacity:0.85;
+    margin-bottom:20px;
+}
+
+/* ================= FORM ================= */
+.field{
+    margin-top:18px;
+}
+
+input{
+    width:100%;
+    padding:14px 16px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    font-size:14px;
+    background:#ffffff;
+    color:#111;
+}
+
+input::placeholder{
+    color:#666;
+}
+
+/* ================= BUTTONS ================= */
+.btn{
+    display:block;
+    width:100%;
+    margin-top:22px;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:all 0.25s ease;
+}
+
+/* Primary Button */
+.btn.primary{
+    background:linear-gradient(135deg,#22c55e,#4ade80);
+    color:#083b22;
+    box-shadow:0 10px 25px rgba(34,197,94,0.45);
+}
+
+.btn.primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 35px rgba(34,197,94,0.6);
+}
+
+/* Success Button */
+.btn.success{
+    background:linear-gradient(135deg,#22c55e,#4ade80);
+    color:#083b22;
+    margin-top:24px;
+    box-shadow:0 10px 25px rgba(34,197,94,0.45);
+}
+
+/* ================= ALERTS ================= */
+.alert{
+    margin-top:14px;
+    padding:12px;
+    border-radius:12px;
+    font-size:14px;
+}
+
+.alert.error{
+    background:rgba(255,0,0,0.18);
+    color:#ffb4b4;
+    border:1px solid rgba(255,0,0,0.35);
+}
+
+.alert.success{
+    background:rgba(34,197,94,0.22);
+    color:#bbf7d0;
+    border:1px solid rgba(34,197,94,0.35);
+}
+
+/* ================= SUCCESS BOX ================= */
+.success-box{
+    margin-top:22px;
+    background:rgba(34,197,94,0.22);
+    padding:20px;
+    border-radius:16px;
+    border:1px solid rgba(34,197,94,0.35);
+}
+
+.success-box span{
+    font-size:13px;
+    opacity:0.85;
+}
+
+.success-box h1{
+    margin:10px 0 0;
+    font-size:28px;
+    letter-spacing:1.5px;
+}
+
+/* ================= LINKS ================= */
+.links{
+    margin-top:18px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    font-size:14px;
+}
+
+.links span{
+    color:rgba(255,255,255,0.5);
+}
+
+.links a{
+    color:#22c55e;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+
+/* ⭐ FIXED FORGOT PASSWORD */
+.links a.forgot{
+    color:#facc15;           /* Yellow */
+    font-weight:700;
+}
+
+.links a.forgot:hover{
+    color:#fde047;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:480px){
+    .card{
+        padding:28px 24px;
+    }
+
+    .card h2{
+        font-size:22px;
+    }
+
+    .success-box h1{
+        font-size:24px;
+    }
+}

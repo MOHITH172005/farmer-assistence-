@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>👤 Farmer Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+
+<div class="profile-container">
+
+    <!-- Back -->
+    <a href="{% url 'dashboard' %}" class="back-btn">⬅ Back to Dashboard</a>
+
+    <div class="profile-card">
+        <h2>👤 Farmer Profile</h2>
+        <p class="subtitle">Update your farming preferences</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Email -->
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email"
+                       value="{{ request.user.email }}"
+                       placeholder="Enter email" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone"
+                       placeholder="Enter mobile number">
+            </div>
+
+            <!-- Primary Crop -->
+            <div class="form-group">
+                <label>Primary Crop</label>
+                <input type="text" name="primary_crop"
+                       placeholder="Eg: Rice">
+            </div>
+
+            <!-- Secondary Crop -->
+            <div class="form-group">
+                <label>Secondary Crop (Optional)</label>
+                <input type="text" name="secondary_crop"
+                       placeholder="Eg: Cotton">
+            </div>
+
+            <!-- Farm Size -->
+            <div class="form-group">
+                <label>Farm Size (Acres)</label>
+                <input type="number" step="0.1"
+                       name="farm_size"
+                       placeholder="Eg: 2.5">
+            </div>
+
+            <!-- Soil Type -->
+            <div class="form-group">
+                <label>Soil Type</label>
+                <select name="soil_type">
+                    <option value="">Select soil type</option>
+                    <option>Black Soil</option>
+                    <option>Red Soil</option>
+                    <option>Alluvial Soil</option>
+                    <option>Laterite Soil</option>
+                </select>
+            </div>
+
+            <!-- Irrigation -->
+            <div class="form-group">
+                <label>Irrigation Type</label>
+                <select name="irrigation_type">
+                    <option value="">Select irrigation</option>
+                    <option>Rainfed</option>
+                    <option>Canal</option>
+                    <option>Borewell</option>
+                    <option>Drip</option>
+                </select>
+            </div>
+
+            <!-- Experience -->
+            <div class="form-group">
+                <label>Farming Experience (Years)</label>
+                <input type="number" name="experience"
+                       placeholder="Eg: 10">
+            </div>
+
+            <!-- Language -->
+            <div class="form-group">
+                <label>Preferred Language</label>
+                <select name="language">
+                    <option>English</option>
+                    <option>Telugu</option>
+                    <option>Hindi</option>
+                </select>
+            </div>
+
+            <!-- Alerts -->
+            <div class="form-group checkbox">
+                <input type="checkbox" name="sms_alerts" checked>
+                <label>Receive SMS Alerts</label>
+            </div>
+
+            <button type="submit" class="save-btn">💾 Save Profile</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

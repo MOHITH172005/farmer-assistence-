@@ -1,0 +1,137 @@
+/* ===== CHATGPT STYLE THEME ===== */
+
+body {
+    background: #0f172a; /* dark blue */
+    font-family: "Segoe UI", system-ui, sans-serif;
+    color: #e5e7eb;
+}
+
+/* Main container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #020617;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+/* Input box */
+.chat-box {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.chat-box input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    background: #020617;
+    color: #e5e7eb;
+    outline: none;
+}
+
+.chat-box input::placeholder {
+    color: #94a3b8;
+}
+
+/* Ask button */
+.btn.green {
+    background: #22c55e;
+    color: #022c22;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn.green:hover {
+    background: #16a34a;
+}
+
+/* Chat area */
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 25px;
+}
+
+/* Message row */
+.chat-message {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+/* User on right */
+.chat-message.user {
+    flex-direction: row-reverse;
+}
+
+/* AI on left */
+.chat-message.ai {
+    flex-direction: row;
+}
+
+/* Avatar */
+.avatar {
+    font-size: 26px;
+}
+
+/* Chat bubble */
+.bubble {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* User bubble */
+.chat-message.user .bubble {
+    background: #1e40af;
+    color: #e0f2fe;
+    border-top-right-radius: 4px;
+}
+
+/* AI bubble */
+.chat-message.ai .bubble {
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: #e5e7eb;
+    border-top-left-radius: 4px;
+}
+
+/* Back button */
+.back {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn.outline {
+    border: 1px solid #475569;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: #e5e7eb;
+    text-decoration: none;
+}
+
+.btn.outline:hover {
+    background: #020617;
+}

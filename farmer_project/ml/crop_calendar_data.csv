@@ -1,0 +1,80 @@
+crop,region,sowing_month,crop_duration_days
+Rice,Andhra Pradesh,6,120
+Rice,Telangana,6,125
+Rice,Tamil Nadu,6,130
+Rice,West Bengal,6,135
+Rice,Odisha,6,125
+Rice,Bihar,6,120
+Rice,Chhattisgarh,6,125
+Rice,Assam,6,140
+
+Wheat,Punjab,11,140
+Wheat,Haryana,11,135
+Wheat,Uttar Pradesh,11,145
+Wheat,Madhya Pradesh,11,140
+Wheat,Rajasthan,11,135
+Wheat,Bihar,11,140
+
+Maize,Karnataka,7,110
+Maize,Andhra Pradesh,7,105
+Maize,Telangana,7,110
+Maize,Bihar,6,115
+Maize,Madhya Pradesh,6,110
+Maize,Rajasthan,7,100
+
+Cotton,Maharashtra,6,180
+Cotton,Telangana,6,170
+Cotton,Gujarat,6,175
+Cotton,Andhra Pradesh,6,165
+Cotton,Punjab,5,160
+Cotton,Rajasthan,5,170
+
+Sugarcane,Uttar Pradesh,2,365
+Sugarcane,Maharashtra,1,360
+Sugarcane,Karnataka,1,355
+Sugarcane,Tamil Nadu,1,350
+Sugarcane,Andhra Pradesh,1,340
+
+Groundnut,Andhra Pradesh,6,110
+Groundnut,Gujarat,6,120
+Groundnut,Tamil Nadu,6,105
+Groundnut,Karnataka,6,115
+Groundnut,Maharashtra,6,120
+
+Soybean,Madhya Pradesh,6,95
+Soybean,Maharashtra,6,100
+Soybean,Rajasthan,6,95
+Soybean,Chhattisgarh,6,100
+
+Pulses (Red Gram),Andhra Pradesh,6,160
+Pulses (Red Gram),Karnataka,6,155
+Pulses (Red Gram),Maharashtra,6,165
+Pulses (Red Gram),Telangana,6,160
+
+Pulses (Green Gram),Tamil Nadu,6,70
+Pulses (Green Gram),Andhra Pradesh,6,75
+Pulses (Green Gram),Karnataka,6,70
+
+Mustard,Rajasthan,10,120
+Mustard,Haryana,10,115
+Mustard,Uttar Pradesh,10,120
+Mustard,Madhya Pradesh,10,125
+
+Sunflower,Karnataka,6,95
+Sunflower,Andhra Pradesh,6,100
+Sunflower,Maharashtra,6,90
+
+Chilli,Andhra Pradesh,6,150
+Chilli,Telangana,6,145
+Chilli,Karnataka,6,140
+Chilli,Tamil Nadu,6,135
+
+Tomato,Andhra Pradesh,6,90
+Tomato,Karnataka,6,85
+Tomato,Tamil Nadu,6,80
+Tomato,Maharashtra,6,90
+
+Onion,Maharashtra,6,120
+Onion,Karnataka,6,115
+Onion,Andhra Pradesh,6,110
+Onion,Tamil Nadu,6,105

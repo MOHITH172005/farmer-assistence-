@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trouble to Login | Farmer Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/trouble_login.css' %}">
+</head>
+<body>
+
+<div class="trouble-wrapper">
+    <div class="card">
+
+        <!-- HEADER -->
+        <h2>Trouble to Login</h2>
+        <p class="subtitle">
+            {% if step == "otp" %}
+                Enter OTP sent to your mobile
+            {% elif step == "success" %}
+                Account Found
+            {% else %}
+                Enter your registered mobile number
+            {% endif %}
+        </p>
+
+        <!-- MESSAGES -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- ================= STEP 1: MOBILE NUMBER ================= -->
+        {% if step == "mobile" or not step %}
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="field">
+                    <input
+                        type="tel"
+                        name="mobile"
+                        placeholder="Enter Mobile Number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn primary">
+                    Send OTP
+                </button>
+            </form>
+
+            <div class="links">
+                <a href="{% url 'login' %}">Back to Login</a>
+                <a href="{% url 'register' %}">Create Account</a>
+            </div>
+        {% endif %}
+
+        <!-- ================= STEP 2: OTP VERIFICATION ================= -->
+        {% if step == "otp" %}
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="field">
+                    <input
+                        type="text"
+                        name="otp"
+                        placeholder="Enter 6-digit OTP"
+                        maxlength="6"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn primary">
+                    Verify OTP
+                </button>
+            </form>
+
+            <div class="links">
+                <a href="{% url 'trouble_login' %}">Change Mobile Number</a>
+            </div>
+        {% endif %}
+
+        <!-- ================= STEP 3: SHOW USER ID ================= -->
+        {% if step == "success" %}
+            <div class="success-box">
+                <span>Your Farmer ID</span>
+                <h1>{{ user_id }}</h1>
+            </div>
+
+            <a href="{% url 'login' %}" class="btn success">
+                Go to Login
+            </a>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>

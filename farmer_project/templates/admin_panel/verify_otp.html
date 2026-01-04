@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+
+    <!-- ✅ CSS IMPORT -->
+    <link rel="stylesheet" href="{% static 'css/admin-verify-otp.css' %}">
+</head>
+<body>
+
+<div class="otp-wrapper">
+    <div class="otp-card">
+        <h2>🔐 Verify OTP</h2>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text"
+                   name="otp"
+                   placeholder="Enter OTP"
+                   required>
+
+            <button type="submit">Verify OTP</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

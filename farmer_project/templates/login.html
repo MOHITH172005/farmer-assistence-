@@ -1,0 +1,96 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Login | Farmer Assistant" %}</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <!-- LEFT BRAND SECTION -->
+    <div class="brand-section">
+        <h1>{% trans "Farmer Assistant" %}</h1>
+        <p>
+            {% trans "Smart Agriculture" %}<br>
+            {% trans "Powered by Artificial Intelligence" %}
+        </p>
+    </div>
+
+    <!-- LOGIN CARD -->
+    <div class="login-card">
+        <h2>{% trans "Welcome Back" %}</h2>
+        <span class="subtitle">{% trans "Login to your account" %}</span>
+
+        <!-- 🔴 ERROR / SUCCESS MESSAGES -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-msg">
+                    {{ message|safe }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- LOGIN FORM -->
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <!-- ✅ FIXED USER ID FIELD -->
+            <div class="field">
+                <input
+                    type="text"
+                    name="user_id"
+                    required
+                    autocomplete="off"
+                >
+                <label>{% trans "User ID" %}</label>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="field">
+                <input
+                    type="password"
+                    name="password"
+                    required
+                >
+                <label>{% trans "Password" %}</label>
+            </div>
+
+            <button type="submit" class="login-btn">
+                {% trans "Login" %}
+            </button>
+
+            <!-- EXTRA LINKS -->
+            <div class="extra">
+                <a href="{% url 'trouble_login' %}">
+                    {% trans "Trouble to login?" %}
+                </a>
+
+                <span>|</span>
+
+                <a href="{% url 'forgot_password' %}" class="forgot-link">
+                    {% trans "Forgot Password?" %}
+                </a>
+
+                <span>|</span>
+
+                <a href="{% url 'register' %}">
+                    {% trans "Create account" %}
+                </a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

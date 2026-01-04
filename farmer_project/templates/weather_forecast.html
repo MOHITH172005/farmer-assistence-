@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="{% static 'css/weather.css' %}">
+</head>
+
+<body>
+
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+    <span class="page-title">
+        {{ page_title|default:"Weather Forecast" }}
+    </span>
+</div>
+
+<div class="container">
+
+    <h1>☁️ 7-Day Weather Forecast</h1>
+    <p class="subtitle" id="location-text">Detecting your location…</p>
+
+    <!-- ===== WEATHER GRID ===== -->
+    <div class="weather-grid" id="weather-grid">
+        <p class="loading">Loading real-time forecast…</p>
+    </div>
+
+    <!-- ===== ALERT ===== -->
+    <div class="alert" id="weather-alert" style="display:none;">
+        ⚠️ Rainfall Alert: Heavy rain expected in the coming days.
+    </div>
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+<!-- ===== REAL-TIME WEATHER SCRIPT ===== -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const locationText = document.getElementById("location-text");
+    const grid = document.getElementById("weather-grid");
+    const alertBox = document.getElementById("weather-alert");
+
+    if (!navigator.geolocation) {
+        locationText.innerText = "Location not supported";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            try {
+                // 🔹 Reverse geocoding (city/state)
+                const geoRes = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+                );
+                const geoData = await geoRes.json();
+
+                const city =
+                    geoData.address.city ||
+                    geoData.address.town ||
+                    geoData.address.village ||
+                    "Your area";
+
+                const state = geoData.address.state || "";
+
+                locationText.innerText = `Forecast for ${city}, ${state}`;
+
+                // 🔹 REAL-TIME WEATHER API (Open-Meteo – FREE)
+                const weatherRes = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,precipitation_sum&timezone=Asia/Kolkata`
+                );
+
+                const weatherData = await weatherRes.json();
+                const days = weatherData.daily.time;
+                const temps = weatherData.daily.temperature_2m_max;
+                const rain = weatherData.daily.precipitation_sum;
+
+                grid.innerHTML = "";
+
+                let heavyRainDetected = false;
+
+                for (let i = 0; i < days.length; i++) {
+                    const rainMM = rain[i];
+                    if (rainMM >= 20) heavyRainDetected = true;
+
+                    const card = document.createElement("div");
+                    card.className = "weather-card";
+
+                    card.innerHTML = `
+                        <h3>${new Date(days[i]).toLocaleDateString("en-IN", { weekday: "short" })}</h3>
+                        <p class="temp">${temps[i]}°C</p>
+                        <p class="rain">🌧 ${rainMM} mm</p>
+                    `;
+
+                    grid.appendChild(card);
+                }
+
+                if (heavyRainDetected) {
+                    alertBox.style.display = "block";
+                }
+
+            } catch (err) {
+                locationText.innerText = "Unable to fetch weather data";
+                grid.innerHTML = "<p>Error loading forecast</p>";
+            }
+        },
+        () => {
+            locationText.innerText = "Location permission denied";
+        },
+        {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
+        }
+    );
+});
+</script>
+
+</body>
+</html>

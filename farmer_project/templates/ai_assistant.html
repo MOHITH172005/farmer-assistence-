@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===== BACK NAVIGATION ===== -->
+<div class="back-bar">
+    <span class="back-btn" onclick="history.back()">⬅ Back</span>
+
+    <span class="page-title">
+        {{ page_title|default:"Dashboard" }}
+    </span>
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AI Farming Assistant</title>
+    <link rel="stylesheet" href="{% static 'css/ai_chat.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🤖 AI Farming Assistant</h1>
+    <p class="subtitle">Ask any farming question</p>
+
+    <!-- Chat Input -->
+    <form method="POST" class="chat-box">
+        {% csrf_token %}
+        <input type="text" name="question"
+               placeholder="Ask about crops, disease, fertilizer, weather..."
+               value="{{ question|default:'' }}"
+               required>
+        <button class="btn green">Ask</button>
+    </form>
+
+    <!-- Chat Messages -->
+    {% if answer %}
+    <div class="chat-area">
+
+        <!-- User Message -->
+        <div class="chat-message user">
+            <div class="avatar">👨‍🌾</div>
+            <div class="bubble">
+                {{ question }}
+            </div>
+        </div>
+
+        <!-- AI Message -->
+        <div class="chat-message ai">
+            <div class="avatar">🤖</div>
+            <div class="bubble">
+                {{ answer }}
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+
+    <div class="back">
+        <a href="/" class="btn outline">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>
